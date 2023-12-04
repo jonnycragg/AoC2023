@@ -24,10 +24,10 @@ def readData(file):
                         index = index + 1
                 index = count
         print(cardwins)
-        sum = 0
+        sumit = 0
         for n in cardwins:
-            sum = sum + n
-        print(sum)
+            sumit = sumit + n
+        print(sumit)
     return mygames
 def findwinner(game):
     # check numbers in first list exist in second and if so then calc value and return

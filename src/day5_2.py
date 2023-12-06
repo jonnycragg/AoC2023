@@ -21,34 +21,43 @@ def readData(file):
                 nlist.append(nline.split())
             datalist.append(nlist)
         seeds = datalist[0]
-        #print(seeds)
-        #print(datalist)
+        print(seeds)
+        print(datalist)
         locations = []
-        while len(seeds) > 0:
-            start = 0
-            end = 100000
-            #print("pair of seed range" + str(end-start))
-            #print(start)
-            #print(end)
-            #print(seeds)
-            #print(datalist)
-            while start < end:
-                #print(start)
-                pos = dohfind(start, datalist[1])
-                pos = dohfind(pos, datalist[2])
-                pos = dohfind(pos, datalist[3])
-                pos = dohfind(pos, datalist[4])
-                pos = dohfind(pos, datalist[5])
-                pos = dohfind(pos, datalist[6])
-                pos = dohfind(pos, datalist[7])
-                locations.append(pos)
-                start = start + 1
-    return locations
+        found = False
+        # loop backwards, start from 0 and travers backwards until we find a seed in list then stop
+        start = 0
+        end = 100000000
+        while start < end:
+            if start == 100000:
+                print("looping through..." + str(start))
+            pos = dohfind(start, datalist[7])
+            #print(pos)
+            pos = dohfind(pos, datalist[6])
+            #print(pos)
+            pos = dohfind(pos, datalist[5])
+            #print(pos)
+            pos = dohfind(pos, datalist[4])
+            #print(pos)
+            pos = dohfind(pos, datalist[3])
+            #print(pos)
+            pos = dohfind(pos, datalist[2])
+            #print(pos)
+            pos = dohfind(pos, datalist[1])
+            #print(pos)
+            if str(pos) in seeds:
+                found = True
+                print("reverse found a seed")
+                print(pos)
+                break
+            start = start + 1
+    return pos
 
 def dohfind(s,firstsecond):
     for check in firstsecond:
-        if int(check[1]) <= s < (int(check[1]) + int(check[2])):
-            return int(check[0]) + (s-int(check[1]))
+        #print(check[0] + " <= " + str(s) + " < " + str(int(check[0]) + int(check[2])))
+        if int(check[0]) <= s < (int(check[0]) + int(check[2])):
+            return int(check[1]) + (s-int(check[0]))
     return s
 
 
@@ -75,12 +84,10 @@ if (__name__ == "__main__"):
     start_time = time.time()
     myInput = readData('../data/day5_data')
     print(myInput)
-    myInput.sort()
-    print(myInput)
-    print(myInput[0])
     print("--- %s seconds ---" % (time.time() - start_time))
-    #myInput = readData('../data/day5_realdata')
-    #print(myInput)
+    myInput = readData('../data/day5_realdata')
+    print(myInput)
+    print("--- %s seconds ---" % (time.time() - start_time))
     #myInput.sort()
     #print(myInput)
     #print(myInput[0])

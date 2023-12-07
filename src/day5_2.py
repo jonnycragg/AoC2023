@@ -28,9 +28,12 @@ def readData(file):
         # loop backwards, start from 0 and travers backwards until we find a seed in list then stop
         start = 0
         end = 100000000
+        printcounter = 0
         while start < end:
-            if start == 100000:
+            printcounter = printcounter + 1
+            if printcounter == 100000:
                 print("looping through..." + str(start))
+                printcounter = 0
             pos = dohfind(start, datalist[7])
             #print(pos)
             pos = dohfind(pos, datalist[6])
